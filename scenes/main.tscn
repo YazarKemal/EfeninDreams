@@ -1,12 +1,7 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_ground"]
-size = Vector3(30, 0.4, 30)
-
-[sub_resource type="BoxShape3D" id="BoxShape_ground"]
-size = Vector3(30, 0.4, 30)
+[ext_resource type="PackedScene" path="res://scenes/environment/island.tscn" id="1_island"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_player"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
 radius = 0.45
@@ -16,30 +11,18 @@ height = 1.8
 radius = 0.45
 height = 1.8
 
-[sub_resource type="SphereMesh" id="SphereMesh_rock"]
-radius = 0.8
-height = 1.6
-
 [node name="Main" type="Node3D"]
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 rotation_degrees = Vector3(-55, -25, 0)
 shadow_enabled = true
-light_energy = 1.25
+light_energy = 1.5
 
-[node name="Ground" type="StaticBody3D" parent="."]
-
-[node name="Mesh" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("BoxMesh_ground")
-position = Vector3(0, -0.2, 0)
-
-[node name="Collision" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("BoxShape_ground")
-position = Vector3(0, -0.2, 0)
+[node name="Island" parent="." instance=ExtResource("1_island")]
 
 [node name="Player" type="CharacterBody3D" parent="."]
-script = ExtResource("1_player")
-position = Vector3(0, 1.0, 4.0)
+position = Vector3(0, 8, 2)
+script = ExtResource("2_player")
 
 [node name="Collision" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape_player")
@@ -56,10 +39,3 @@ margin = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="Player/CameraPivot/SpringArm3D"]
 current = true
-
-[node name="TestRock" type="StaticBody3D" parent="."]
-position = Vector3(2.5, 0.8, -2.0)
-
-[node name="Mesh" type="MeshInstance3D" parent="TestRock"]
-mesh = SubResource("SphereMesh_rock")
-scale = Vector3(1.0, 0.75, 1.15)

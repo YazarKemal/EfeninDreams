@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/environment/island/Meshy_AI_Sunny_Stone_Plateau_0918232702_texture_obj/Meshy_AI_Sunny_Stone_Plateau_0918232702_texture.obj" id="1_island"]
+[ext_resource type="Script" path="res://scripts/environment/island.gd" id="2_script"]
+
+[node name="Island" type="Node3D"]
+script = ExtResource("2_script")
+target_size = 30.0
+
+[node name="IslandMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_island")
